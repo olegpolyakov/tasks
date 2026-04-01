@@ -1,0 +1,12 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/olegpolyakov/tasks-api.git
+[submodule "app"]
+	path = app
+	url = https://github.com/olegpolyakov/tasks-app.git
+[submodule "core"]
+	path = core
+	url = https://github.com/olegpolyakov/tasks-core.git
+[submodule "db"]
+	path = db
+	url = https://github.com/olegpolyakov/tasks-db.git

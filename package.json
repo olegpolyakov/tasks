@@ -1,0 +1,9 @@
+{
+    "name": "@olegpoliakov/tasks",
+    "version": "0.1.0",
+    "type": "module",
+    "exports": {
+        "./core": "./core/src/index.ts",
+        "./db": "./db/src/index.ts"
+    }
+}
