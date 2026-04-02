@@ -5,5 +5,10 @@
     "exports": {
         "./core": "./core/src/index.ts",
         "./db": "./db/src/index.ts"
+    },
+    "scripts": {
+        "update": "git submodule update --remote --merge",
+        "prestart": "npm run build --prefix app",
+        "start": "npm start --prefix api"
     }
 }
