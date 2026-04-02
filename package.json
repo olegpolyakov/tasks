@@ -7,7 +7,7 @@
         "./db": "./db/src/index.ts"
     },
     "scripts": {
-        "update": "git submodule update --remote --merge --recursive",
+        "update": "git submodule update --init --remote --merge --recursive",
         "prestart": "npm run build --prefix app",
         "start": "npm start --prefix api"
     }
