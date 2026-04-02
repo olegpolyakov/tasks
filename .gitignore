@@ -1,3 +1,5 @@
+.envrc
+.nvmrc
 etc
 log
 node_modules
