@@ -1,0 +1,8 @@
+.git
+.gitmodules
+node_modules
+**/node_modules
+**/.vite
+**/.vite-temp
+**/dist
+npm-debug.log

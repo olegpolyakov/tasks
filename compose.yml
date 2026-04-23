@@ -1,0 +1,57 @@
+name: olegpolyakov-tasks
+
+services:
+  db:
+    container_name: tasks-db
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    restart: unless-stopped
+    volumes:
+      - /data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      start_period: 20s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    container_name: tasks-api
+    depends_on:
+      db:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: api/dockerfile
+      secrets:
+        - npmrc
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3001
+      DB_CONNECTION_STRING: mongodb://db:27017/tasks
+      SESSION_SECRET: tasks-session-secret
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+
+  app:
+    container_name: tasks-app
+    depends_on:
+      api:
+        condition: service_started
+    build:
+      context: .
+      dockerfile: app/dockerfile
+      secrets:
+        - npmrc
+    environment:
+      VITE_API_URL: http://api:3001
+      VITE_AUTH_URL: http://api:3001/auth
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+
+secrets:
+  npmrc:
+    file: ~/.npmrc
